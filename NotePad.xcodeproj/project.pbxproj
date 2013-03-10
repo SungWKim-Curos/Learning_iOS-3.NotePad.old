@@ -92,9 +92,9 @@
 				E256EACD16ECC62900F3889D /* AppDelegate.m */,
 				E256EAD516ECC62A00F3889D /* MasterViewController.h */,
 				E256EAD616ECC62A00F3889D /* MasterViewController.m */,
+				E256EADB16ECC62A00F3889D /* MasterViewController.xib */,
 				E256EAD816ECC62A00F3889D /* DetailViewController.h */,
 				E256EAD916ECC62A00F3889D /* DetailViewController.m */,
-				E256EADB16ECC62A00F3889D /* MasterViewController.xib */,
 				E256EADE16ECC62A00F3889D /* DetailViewController.xib */,
 				E256EAC416ECC62900F3889D /* Supporting Files */,
 			);
