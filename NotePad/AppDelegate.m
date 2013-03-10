@@ -20,6 +20,9 @@
     MasterViewController *masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
     self.window.rootViewController = self.navigationController;
+    
+    masterViewController.managedObjectContext = self.managedObjectContext ;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -49,6 +52,89 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+-(void) saveContext
+{
+    NSError* error = nil ;
+    NSManagedObjectContext * managedObjectContext = self.managedObjectContext ;
+    if( nil == managedObjectContext )
+        return ;
+    
+    if( [managedObjectContext hasChanges] &&
+       ! [managedObjectContext save:&error] ) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
+
+
+#pragma mark - Core Data stack
+
+@synthesize managedObjectContext = _managedObjectContext ;
+@synthesize managedObjectModel = _managedObjectModel ;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator ;
+
+-(NSManagedObjectContext*) managedObjectContext
+{
+    if( _managedObjectContext != nil )
+        return _managedObjectContext;
+
+    
+    NSPersistentStoreCoordinator* coordinator = self.persistentStoreCoordinator ;
+    if( coordinator != nil ) {
+        _managedObjectContext = [ [NSManagedObjectContext alloc] init ];
+        [ _managedObjectContext setPersistentStoreCoordinator:coordinator ];
+    }
+    return _managedObjectContext ;
+}
+
+
+-(NSPersistentStoreCoordinator*) persistentStoreCoordinator
+{
+    if( _persistentStoreCoordinator != nil )
+        return _persistentStoreCoordinator ;
+
+    
+    // File을 쓰고 읽을 수 있는 directory를 알아낸다.
+    NSArray* docDirURLs =
+        [ [NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                inDomains:NSUserDomainMask ];
+    NSURL* docDirURL = [ docDirURLs lastObject ] ;
+    
+    // Store File의 위치를 지정한다.
+    NSURL* storeURL = [ docDirURL URLByAppendingPathComponent:@"NotePad.sqlite" ];
+
+    // Model을 property를 통해 얻어내서 그것을 이용해 객체 생성
+    _persistentStoreCoordinator =
+        [ [NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel ];
+    NSError* error = nil ;
+    if( ! [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                    configuration:nil
+                                                              URL:storeURL
+                                                          options:nil
+                                                            error:&error] ) {
+        NSLog( @"Unresolved error %@, %@", error, error.userInfo );
+        abort();
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+
+-(NSManagedObjectModel*) managedObjectModel
+{
+    if( _managedObjectModel != nil )
+        return _managedObjectModel ;
+    
+    
+    NSURL* modelURL = [ [NSBundle mainBundle] URLForResource:@"NotePad"
+                                               withExtension:@"momd" ];
+    _managedObjectModel = [ [NSManagedObjectModel alloc]
+                                initWithContentsOfURL:modelURL ];
+    
+    return _managedObjectModel ;
 }
 
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E20D4BE116ECE13100BB5C14 /* NotePad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E20D4BDF16ECE13100BB5C14 /* NotePad.xcdatamodeld */; };
+		E20D4BE416ECE67000BB5C14 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20D4BE316ECE67000BB5C14 /* CoreData.framework */; };
 		E256EABE16ECC62900F3889D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E256EABD16ECC62900F3889D /* UIKit.framework */; };
 		E256EAC016ECC62900F3889D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E256EABF16ECC62900F3889D /* Foundation.framework */; };
 		E256EAC216ECC62900F3889D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E256EAC116ECC62900F3889D /* CoreGraphics.framework */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E20D4BE016ECE13100BB5C14 /* NotePad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotePad.xcdatamodel; sourceTree = "<group>"; };
+		E20D4BE316ECE67000BB5C14 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E256EAB916ECC62900F3889D /* NotePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E256EABD16ECC62900F3889D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E256EABF16ECC62900F3889D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -49,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E20D4BE416ECE67000BB5C14 /* CoreData.framework in Frameworks */,
 				E256EABE16ECC62900F3889D /* UIKit.framework in Frameworks */,
 				E256EAC016ECC62900F3889D /* Foundation.framework in Frameworks */,
 				E256EAC216ECC62900F3889D /* CoreGraphics.framework in Frameworks */,
@@ -78,6 +83,7 @@
 		E256EABC16ECC62900F3889D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E20D4BE316ECE67000BB5C14 /* CoreData.framework */,
 				E256EABD16ECC62900F3889D /* UIKit.framework */,
 				E256EABF16ECC62900F3889D /* Foundation.framework */,
 				E256EAC116ECC62900F3889D /* CoreGraphics.framework */,
@@ -96,6 +102,7 @@
 				E256EAD816ECC62A00F3889D /* DetailViewController.h */,
 				E256EAD916ECC62A00F3889D /* DetailViewController.m */,
 				E256EADE16ECC62A00F3889D /* DetailViewController.xib */,
+				E20D4BDF16ECE13100BB5C14 /* NotePad.xcdatamodeld */,
 				E256EAC416ECC62900F3889D /* Supporting Files */,
 			);
 			path = NotePad;
@@ -186,6 +193,7 @@
 				E256EACE16ECC62900F3889D /* AppDelegate.m in Sources */,
 				E256EAD716ECC62A00F3889D /* MasterViewController.m in Sources */,
 				E256EADA16ECC62A00F3889D /* DetailViewController.m in Sources */,
+				E20D4BE116ECE13100BB5C14 /* NotePad.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,8 +318,22 @@
 				E256EAE516ECC62A00F3889D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E20D4BDF16ECE13100BB5C14 /* NotePad.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E20D4BE016ECE13100BB5C14 /* NotePad.xcdatamodel */,
+			);
+			currentVersion = E20D4BE016ECE13100BB5C14 /* NotePad.xcdatamodel */;
+			path = NotePad.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E256EAB016ECC62900F3889D /* Project object */;
 }

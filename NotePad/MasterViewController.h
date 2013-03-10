@@ -12,6 +12,8 @@
 
 @interface MasterViewController : UITableViewController
 
+@property(strong,nonatomic) NSManagedObjectContext * managedObjectContext ;
+
 @property (strong, nonatomic) DetailViewController *detailViewController;
 
 @end
