@@ -10,4 +10,6 @@
 
 @interface EditingVwCtlr : UIViewController
 
+@property(strong,nonatomic) NSManagedObjectContext * managedObjectContext ;
+
 @end

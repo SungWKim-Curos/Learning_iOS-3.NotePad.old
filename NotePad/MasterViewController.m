@@ -47,6 +47,8 @@
         [ [EditingVwCtlr alloc] initWithNibName:@"EditingVwCtlr"
                                          bundle:nil ] ;
     
+    oEditingVwCtlr.managedObjectContext = _managedObjectContext ;
+    
     [ super.navigationController presentModalViewController:oEditingVwCtlr
                                                    animated:YES ] ;
 }
