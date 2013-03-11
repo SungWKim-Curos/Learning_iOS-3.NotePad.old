@@ -8,6 +8,8 @@
 
 #import "EditingVwCtlr.h"
 
+#import "Note.h"
+
 
 @interface EditingVwCtlr ()
 
@@ -46,5 +48,20 @@
 
 -(IBAction) saveDidClick:(UIBarButtonItem*)a_oSender
 {
+    // 생성/삽입
+    Note* oNote =
+        [ NSEntityDescription insertNewObjectForEntityForName:@"Note"
+                                       inManagedObjectContext:_managedObjectContext ];
+    
+    // property값 대입
+    oNote.title = _noteTitle.text ;
+    oNote.content = _content.text ;
+    oNote.date = [ NSDate date ] ;
+    
+    // 저장
+    NSError* oErr = nil ;
+    [ _managedObjectContext save:&oErr ] ;
+    
+    [ super dismissModalViewControllerAnimated:YES ] ;    
 }
 @end

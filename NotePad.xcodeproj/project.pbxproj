@@ -22,6 +22,7 @@
 		E256EADA16ECC62A00F3889D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E256EAD916ECC62A00F3889D /* DetailViewController.m */; };
 		E256EADD16ECC62A00F3889D /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E256EADB16ECC62A00F3889D /* MasterViewController.xib */; };
 		E256EAE016ECC62A00F3889D /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E256EADE16ECC62A00F3889D /* DetailViewController.xib */; };
+		E266AE6116EE469D00AF7D29 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = E266AE6016EE469D00AF7D29 /* Note.m */; };
 		E2E7B35816EE0B070024BBD3 /* EditingVwCtlr.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E7B35616EE0B070024BBD3 /* EditingVwCtlr.m */; };
 		E2E7B35916EE0B070024BBD3 /* EditingVwCtlr.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2E7B35716EE0B070024BBD3 /* EditingVwCtlr.xib */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,8 @@
 		E256EAD916ECC62A00F3889D /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		E256EADC16ECC62A00F3889D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController.xib; sourceTree = "<group>"; };
 		E256EADF16ECC62A00F3889D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController.xib; sourceTree = "<group>"; };
+		E266AE5F16EE469D00AF7D29 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		E266AE6016EE469D00AF7D29 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		E2E7B35516EE0B070024BBD3 /* EditingVwCtlr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditingVwCtlr.h; sourceTree = "<group>"; };
 		E2E7B35616EE0B070024BBD3 /* EditingVwCtlr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditingVwCtlr.m; sourceTree = "<group>"; };
 		E2E7B35716EE0B070024BBD3 /* EditingVwCtlr.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditingVwCtlr.xib; sourceTree = "<group>"; };
@@ -111,6 +114,8 @@
 				E2E7B35616EE0B070024BBD3 /* EditingVwCtlr.m */,
 				E2E7B35716EE0B070024BBD3 /* EditingVwCtlr.xib */,
 				E20D4BDF16ECE13100BB5C14 /* NotePad.xcdatamodeld */,
+				E266AE5F16EE469D00AF7D29 /* Note.h */,
+				E266AE6016EE469D00AF7D29 /* Note.m */,
 				E256EAC416ECC62900F3889D /* Supporting Files */,
 			);
 			path = NotePad;
@@ -204,6 +209,7 @@
 				E256EADA16ECC62A00F3889D /* DetailViewController.m in Sources */,
 				E20D4BE116ECE13100BB5C14 /* NotePad.xcdatamodeld in Sources */,
 				E2E7B35816EE0B070024BBD3 /* EditingVwCtlr.m in Sources */,
+				E266AE6116EE469D00AF7D29 /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
