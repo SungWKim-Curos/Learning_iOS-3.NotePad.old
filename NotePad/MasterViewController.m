@@ -9,6 +9,8 @@
 #import "MasterViewController.h"
 
 #import "DetailViewController.h"
+#import "EditingVwCtlr.h"
+
 
 @interface MasterViewController () {
     NSMutableArray *_objects;
@@ -44,12 +46,8 @@
 
 - (void)insertNewObject:(id)sender
 {
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    EditingVwCtlr* oEditingVwCtlr = [ [EditingVwCtlr alloc] initWithNibName:@"EditingVwCtlr" bundle:nil ] ;
+    [ super.navigationController presentModalViewController:oEditingVwCtlr animated:YES ] ;
 }
 
 #pragma mark - Table View

@@ -22,6 +22,8 @@
 		E256EADA16ECC62A00F3889D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E256EAD916ECC62A00F3889D /* DetailViewController.m */; };
 		E256EADD16ECC62A00F3889D /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E256EADB16ECC62A00F3889D /* MasterViewController.xib */; };
 		E256EAE016ECC62A00F3889D /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E256EADE16ECC62A00F3889D /* DetailViewController.xib */; };
+		E2E7B35816EE0B070024BBD3 /* EditingVwCtlr.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E7B35616EE0B070024BBD3 /* EditingVwCtlr.m */; };
+		E2E7B35916EE0B070024BBD3 /* EditingVwCtlr.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2E7B35716EE0B070024BBD3 /* EditingVwCtlr.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,9 @@
 		E256EAD916ECC62A00F3889D /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		E256EADC16ECC62A00F3889D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController.xib; sourceTree = "<group>"; };
 		E256EADF16ECC62A00F3889D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController.xib; sourceTree = "<group>"; };
+		E2E7B35516EE0B070024BBD3 /* EditingVwCtlr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditingVwCtlr.h; sourceTree = "<group>"; };
+		E2E7B35616EE0B070024BBD3 /* EditingVwCtlr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditingVwCtlr.m; sourceTree = "<group>"; };
+		E2E7B35716EE0B070024BBD3 /* EditingVwCtlr.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditingVwCtlr.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +107,9 @@
 				E256EAD816ECC62A00F3889D /* DetailViewController.h */,
 				E256EAD916ECC62A00F3889D /* DetailViewController.m */,
 				E256EADE16ECC62A00F3889D /* DetailViewController.xib */,
+				E2E7B35516EE0B070024BBD3 /* EditingVwCtlr.h */,
+				E2E7B35616EE0B070024BBD3 /* EditingVwCtlr.m */,
+				E2E7B35716EE0B070024BBD3 /* EditingVwCtlr.xib */,
 				E20D4BDF16ECE13100BB5C14 /* NotePad.xcdatamodeld */,
 				E256EAC416ECC62900F3889D /* Supporting Files */,
 			);
@@ -179,6 +187,7 @@
 				E256EAD416ECC62A00F3889D /* Default-568h@2x.png in Resources */,
 				E256EADD16ECC62A00F3889D /* MasterViewController.xib in Resources */,
 				E256EAE016ECC62A00F3889D /* DetailViewController.xib in Resources */,
+				E2E7B35916EE0B070024BBD3 /* EditingVwCtlr.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +203,7 @@
 				E256EAD716ECC62A00F3889D /* MasterViewController.m in Sources */,
 				E256EADA16ECC62A00F3889D /* DetailViewController.m in Sources */,
 				E20D4BE116ECE13100BB5C14 /* NotePad.xcdatamodeld in Sources */,
+				E2E7B35816EE0B070024BBD3 /* EditingVwCtlr.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +293,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NotePad/NotePad-Prefix.pch";
 				INFOPLIST_FILE = "NotePad/NotePad-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -294,6 +305,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NotePad/NotePad-Prefix.pch";
 				INFOPLIST_FILE = "NotePad/NotePad-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
