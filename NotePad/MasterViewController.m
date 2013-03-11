@@ -22,9 +22,11 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.title = NSLocalizedString(@"Master", @"Master");
-    }
+    if( nil == self )
+        return nil ;
+    
+    self.title = @"NotePad" ;
+
     return self;
 }
 							
@@ -34,21 +36,21 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewNote:)];
     self.navigationItem.rightBarButtonItem = addButton;
 }
 
-- (void)didReceiveMemoryWarning
+
+- (void)insertNewNote:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    EditingVwCtlr* oEditingVwCtlr =
+        [ [EditingVwCtlr alloc] initWithNibName:@"EditingVwCtlr"
+                                         bundle:nil ] ;
+    
+    [ super.navigationController presentModalViewController:oEditingVwCtlr
+                                                   animated:YES ] ;
 }
 
-- (void)insertNewObject:(id)sender
-{
-    EditingVwCtlr* oEditingVwCtlr = [ [EditingVwCtlr alloc] initWithNibName:@"EditingVwCtlr" bundle:nil ] ;
-    [ super.navigationController presentModalViewController:oEditingVwCtlr animated:YES ] ;
-}
 
 #pragma mark - Table View
 

@@ -8,31 +8,33 @@
 
 #import "EditingVwCtlr.h"
 
+
 @interface EditingVwCtlr ()
 
+@property(weak,nonatomic) IBOutlet UINavigationItem* navigationTitle ;
+@property(weak,nonatomic) IBOutlet UITextField* noteTitle ;
+@property(weak,nonatomic) IBOutlet UITextView* content ;
+
 @end
+
 
 @implementation EditingVwCtlr
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
+    if( nil == self )
+        return nil ;
+
     return self;
 }
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    _navigationTitle.title = @"New Note" ;
 }
 
 
@@ -41,4 +43,8 @@
     [ super dismissModalViewControllerAnimated:YES ] ;
 }
 
+
+-(IBAction) saveDidClick:(UIBarButtonItem*)a_oSender
+{
+}
 @end
