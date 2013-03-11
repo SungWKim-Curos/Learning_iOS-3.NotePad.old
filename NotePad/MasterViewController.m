@@ -1,10 +1,3 @@
-//
-//  MasterViewController.m
-//  NotePad
-//
-//  Created by curos on 3/10/13.
-//  Copyright (c) 2013 curos. All rights reserved.
-//
 
 #import "MasterViewController.h"
 
@@ -16,6 +9,7 @@
     NSMutableArray *_objects;
 }
 @end
+
 
 @implementation MasterViewController
 
@@ -29,13 +23,13 @@
 
     return self;
 }
-							
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewNote:)];
     self.navigationItem.rightBarButtonItem = addButton;
 }
@@ -61,15 +55,16 @@
     return 1;
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return _objects.count;
 }
 
-// Customize the appearance of table view cells.
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString * const CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -77,11 +72,22 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
-
     NSDate *object = _objects[indexPath.row];
     cell.textLabel.text = [object description];
     return cell;
 }
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (!self.detailViewController) {
+        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    }
+    NSDate *object = _objects[indexPath.row];
+    self.detailViewController.detailItem = object;
+    [self.navigationController pushViewController:self.detailViewController animated:YES];
+}
+
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -114,15 +120,5 @@
     return YES;
 }
 */
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (!self.detailViewController) {
-        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
-    }
-    NSDate *object = _objects[indexPath.row];
-    self.detailViewController.detailItem = object;
-    [self.navigationController pushViewController:self.detailViewController animated:YES];
-}
 
 @end
