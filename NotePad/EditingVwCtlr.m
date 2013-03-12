@@ -59,8 +59,33 @@
         
         _navBar.hidden = TRUE ;
         
+        
+        // note의 내용
         _noteTitle.text = m_oNote.title ;
         _content.text = m_oNote.content ;
+        
+        // 그림 보여주기
+        const float fSideLen = _imagePreview.frame.size.height ;
+        frame = CGRectMake( 0, 0, fSideLen, fSideLen ) ;
+        for( Picture* oPicture in m_oNote.pictures )
+        {
+            UIImage* oImg = [ UIImage imageWithContentsOfFile:oPicture.filePath ] ;
+            UIImageView* oImgVw = [ [UIImageView alloc] initWithImage:oImg ] ;
+            
+            frame.origin.x += fSideLen * m_uImages ;
+            oImgVw.frame = frame ;
+            [ _imagePreview addSubview:oImgVw ] ;
+            
+            ++m_uImages ;
+        }
+        
+        // button 움직이기
+        frame = _addImgBtn.frame ;
+        frame.origin.x += fSideLen * m_uImages ;
+        _addImgBtn.frame = frame ;
+        
+        CGSize size = CGSizeMake( fSideLen*(m_uImages+1), fSideLen ) ;
+        _imagePreview.contentSize = size ;
     }
     else
     {
