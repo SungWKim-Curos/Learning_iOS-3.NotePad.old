@@ -17,6 +17,7 @@
 @property(weak,nonatomic) IBOutlet UINavigationItem* navigationTitle ;
 @property(weak,nonatomic) IBOutlet UITextField* noteTitle ;
 @property(weak,nonatomic) IBOutlet UITextView* content ;
+@property(assign,nonatomic) IBOutlet UINavigationBar* navBar;
 
 @end
 
@@ -37,7 +38,28 @@
 {
     [super viewDidLoad];
     
-    _navigationTitle.title = @"New Note" ;
+    if( nil != m_oNote )
+    {
+        const float fNavHeight = _navBar.frame.size.height ;
+        
+        CGRect frame = _noteTitle.frame ;
+        frame.origin.y -= fNavHeight ;
+        _noteTitle.frame = frame ;
+        
+        frame = _content.frame ;
+        frame.origin.y -= fNavHeight ;
+        frame.size.height += fNavHeight ;
+        _content.frame = frame ;
+        
+        _navBar.hidden = TRUE ;
+        
+        _noteTitle.text = m_oNote.title ;
+        _content.text = m_oNote.content ;
+    }
+    else
+    {
+        _navigationTitle.title = @"New Note" ;
+    }
 }
 
 

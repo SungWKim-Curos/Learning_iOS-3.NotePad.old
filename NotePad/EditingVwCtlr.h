@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class MasterViewController ;
+@class Note ;
 
 
 @interface EditingVwCtlr : UIViewController
 {
 @public
     MasterViewController* m_oPrevCtlr ;
+    Note* m_oNote ;
 }
 
 @property(strong,nonatomic) NSManagedObjectContext * managedObjectContext ;

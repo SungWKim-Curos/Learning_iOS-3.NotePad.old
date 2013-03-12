@@ -119,12 +119,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!self.detailViewController) {
-        self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
-    }
-    NSDate *object = _objects[indexPath.row];
-    self.detailViewController.detailItem = object;
-    [self.navigationController pushViewController:self.detailViewController animated:YES];
+    EditingVwCtlr* oEditingVwCtlr =
+    [ [EditingVwCtlr alloc] initWithNibName:@"EditingVwCtlr"
+                                     bundle:nil ] ;
+    
+    oEditingVwCtlr.managedObjectContext = _managedObjectContext ;
+    oEditingVwCtlr->m_oPrevCtlr = self ;
+    oEditingVwCtlr->m_oNote = m_oNotes[ indexPath.row ] ;
+    
+    [self.navigationController pushViewController:oEditingVwCtlr animated:YES];
 }
 
 
