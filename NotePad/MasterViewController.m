@@ -3,6 +3,7 @@
 
 #import "DetailViewController.h"
 #import "EditingVwCtlr.h"
+#import "Note.h"
 
 
 @interface MasterViewController () {
@@ -11,7 +12,10 @@
 @end
 
 
-@implementation MasterViewController
+@implementation MasterViewController {
+    NSMutableArray* m_oNotes ;
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +36,28 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewNote:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    
+    // 저장된 note들을 읽어오기
+    NSFetchRequest* oFetchReq = [ [NSFetchRequest alloc] init ] ;
+    NSEntityDescription* oEntity =
+        [ NSEntityDescription entityForName:@"Note"
+                     inManagedObjectContext:_managedObjectContext ] ;
+    [ oFetchReq setEntity:oEntity ] ;
+    
+    // 순서 정하기
+    NSSortDescriptor* oSortDesc =
+        [ NSSortDescriptor sortDescriptorWithKey:@"date"
+                                       ascending:NO ] ;
+    [ oFetchReq setSortDescriptors:@[oSortDesc] ] ;
+    
+    // 실행
+    NSError* oErr = nil ;
+    NSArray* oNotes =
+        [ _managedObjectContext executeFetchRequest:oFetchReq
+                                              error:&oErr ] ;
+    
+    m_oNotes = [ NSMutableArray arrayWithArray:oNotes ] ;
 }
 
 
@@ -58,7 +84,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return m_oNotes.count ;
 }
 
 
@@ -72,8 +98,10 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    // 내용 추가
+    Note* oNote = m_oNotes[ indexPath.row ] ;
+    cell.textLabel.text = oNote.title ;
+    
     return cell;
 }
 
