@@ -90,4 +90,21 @@
     
     [ super dismissModalViewControllerAnimated:YES ] ;    
 }
+
+
+-(IBAction) addPicture
+{
+    UIImagePickerController* oImgPicker = [ [UIImagePickerController alloc] init ] ;
+    oImgPicker.delegate = self ;
+    oImgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [ super presentModalViewController:oImgPicker animated:YES ] ;
+}
+
+
+-(void) imagePickerController:(UIImagePickerController*)a_oPicker
+        didFinishPickingImage:(UIImage*)a_oImg
+                  editingInfo:(NSDictionary*)a_oEditingInfo
+{
+    [a_oPicker dismissModalViewControllerAnimated:YES];
+}
 @end

@@ -13,6 +13,7 @@
 
 
 @interface EditingVwCtlr : UIViewController
+    < UIImagePickerControllerDelegate, UINavigationControllerDelegate >
 {
 @public
     MasterViewController* m_oPrevCtlr ;
