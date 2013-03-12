@@ -9,6 +9,7 @@
 #import "EditingVwCtlr.h"
 
 #import "Note.h"
+#import "MasterViewController.h"
 
 
 @interface EditingVwCtlr ()
@@ -61,6 +62,9 @@
     // 저장
     NSError* oErr = nil ;
     [ _managedObjectContext save:&oErr ] ;
+    
+    // 목록에 알려준다.
+    [ m_oPrevCtlr didIndertNewNote:oNote ] ;
     
     [ super dismissModalViewControllerAnimated:YES ] ;    
 }

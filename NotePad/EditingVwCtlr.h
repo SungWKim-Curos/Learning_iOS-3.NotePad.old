@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class MasterViewController ;
+
+
 @interface EditingVwCtlr : UIViewController
+{
+@public
+    MasterViewController* m_oPrevCtlr ;
+}
 
 @property(strong,nonatomic) NSManagedObjectContext * managedObjectContext ;
 

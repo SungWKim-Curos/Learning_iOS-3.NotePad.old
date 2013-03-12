@@ -9,11 +9,16 @@
 #import <UIKit/UIKit.h>
 
 @class DetailViewController;
+@class Note ;
+
 
 @interface MasterViewController : UITableViewController
 
 @property(strong,nonatomic) NSManagedObjectContext * managedObjectContext ;
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
+
+// Methods
+-(void) didIndertNewNote:(Note*)a_oNewNote ;
 
 @end

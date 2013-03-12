@@ -68,9 +68,20 @@
                                          bundle:nil ] ;
     
     oEditingVwCtlr.managedObjectContext = _managedObjectContext ;
+    oEditingVwCtlr->m_oPrevCtlr = self ;
     
     [ super.navigationController presentModalViewController:oEditingVwCtlr
                                                    animated:YES ] ;
+}
+
+
+-(void) didIndertNewNote:(Note *)a_oNewNote
+{
+    [ m_oNotes insertObject:a_oNewNote atIndex:0];
+    NSIndexPath* oIndexPath = [ NSIndexPath indexPathForRow:0
+                                                  inSection:0];
+    [ super.tableView insertRowsAtIndexPaths:@[oIndexPath]
+                            withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 
