@@ -1,20 +1,19 @@
 //
-//  Note.m
+//  Picture.m
 //  NotePad
 //
 //  Created by curos on 3/13/13.
 //  Copyright (c) 2013 curos. All rights reserved.
 //
 
-#import "Note.h"
 #import "Picture.h"
+#import "Note.h"
 
 
-@implementation Note
+@implementation Picture
 
-@dynamic content;
-@dynamic date;
-@dynamic title;
-@dynamic pictures;
+@dynamic filePath;
+@dynamic caption;
+@dynamic attachedTo;
 
 @end

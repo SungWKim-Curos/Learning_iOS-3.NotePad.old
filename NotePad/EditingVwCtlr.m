@@ -9,6 +9,7 @@
 #import "EditingVwCtlr.h"
 
 #import "Note.h"
+#import "Picture.h"
 #import "MasterViewController.h"
 
 
@@ -87,6 +88,17 @@
     oNote.title = _noteTitle.text ;
     oNote.content = _content.text ;
     oNote.date = [ NSDate date ] ;
+    
+    // 그림 추가
+    unsigned uCount = m_oNewImgPaths.count ;
+    for( unsigned u=0 ; u<uCount ; ++u )
+    {
+        Picture* oPic =
+            [ NSEntityDescription insertNewObjectForEntityForName:@"Picture"
+                                           inManagedObjectContext:_managedObjectContext ];
+        oPic.filePath = m_oNewImgPaths[u] ;
+        oPic.attachedTo = oNote ;
+    }
     
     // 저장
     NSError* oErr = nil ;

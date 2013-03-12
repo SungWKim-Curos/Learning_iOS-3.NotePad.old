@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E20D4BE116ECE13100BB5C14 /* NotePad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E20D4BDF16ECE13100BB5C14 /* NotePad.xcdatamodeld */; };
 		E20D4BE416ECE67000BB5C14 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20D4BE316ECE67000BB5C14 /* CoreData.framework */; };
+		E20ED6FB16EF8111007AD0BD /* Picture.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED6FA16EF8111007AD0BD /* Picture.m */; };
+		E20ED6FF16EF8112007AD0BD /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = E20ED6FE16EF8112007AD0BD /* Note.m */; };
 		E256EABE16ECC62900F3889D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E256EABD16ECC62900F3889D /* UIKit.framework */; };
 		E256EAC016ECC62900F3889D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E256EABF16ECC62900F3889D /* Foundation.framework */; };
 		E256EAC216ECC62900F3889D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E256EAC116ECC62900F3889D /* CoreGraphics.framework */; };
@@ -22,7 +24,6 @@
 		E256EADA16ECC62A00F3889D /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E256EAD916ECC62A00F3889D /* DetailViewController.m */; };
 		E256EADD16ECC62A00F3889D /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E256EADB16ECC62A00F3889D /* MasterViewController.xib */; };
 		E256EAE016ECC62A00F3889D /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E256EADE16ECC62A00F3889D /* DetailViewController.xib */; };
-		E266AE6116EE469D00AF7D29 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = E266AE6016EE469D00AF7D29 /* Note.m */; };
 		E2E7B35816EE0B070024BBD3 /* EditingVwCtlr.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E7B35616EE0B070024BBD3 /* EditingVwCtlr.m */; };
 		E2E7B35916EE0B070024BBD3 /* EditingVwCtlr.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2E7B35716EE0B070024BBD3 /* EditingVwCtlr.xib */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,10 @@
 /* Begin PBXFileReference section */
 		E20D4BE016ECE13100BB5C14 /* NotePad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotePad.xcdatamodel; sourceTree = "<group>"; };
 		E20D4BE316ECE67000BB5C14 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E20ED6F916EF8111007AD0BD /* Picture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Picture.h; sourceTree = "<group>"; };
+		E20ED6FA16EF8111007AD0BD /* Picture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Picture.m; sourceTree = "<group>"; };
+		E20ED6FD16EF8112007AD0BD /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		E20ED6FE16EF8112007AD0BD /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		E256EAB916ECC62900F3889D /* NotePad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NotePad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E256EABD16ECC62900F3889D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E256EABF16ECC62900F3889D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -49,8 +54,6 @@
 		E256EAD916ECC62A00F3889D /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		E256EADC16ECC62A00F3889D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController.xib; sourceTree = "<group>"; };
 		E256EADF16ECC62A00F3889D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController.xib; sourceTree = "<group>"; };
-		E266AE5F16EE469D00AF7D29 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		E266AE6016EE469D00AF7D29 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		E2E7B35516EE0B070024BBD3 /* EditingVwCtlr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditingVwCtlr.h; sourceTree = "<group>"; };
 		E2E7B35616EE0B070024BBD3 /* EditingVwCtlr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditingVwCtlr.m; sourceTree = "<group>"; };
 		E2E7B35716EE0B070024BBD3 /* EditingVwCtlr.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditingVwCtlr.xib; sourceTree = "<group>"; };
@@ -114,8 +117,10 @@
 				E2E7B35616EE0B070024BBD3 /* EditingVwCtlr.m */,
 				E2E7B35716EE0B070024BBD3 /* EditingVwCtlr.xib */,
 				E20D4BDF16ECE13100BB5C14 /* NotePad.xcdatamodeld */,
-				E266AE5F16EE469D00AF7D29 /* Note.h */,
-				E266AE6016EE469D00AF7D29 /* Note.m */,
+				E20ED6FD16EF8112007AD0BD /* Note.h */,
+				E20ED6FE16EF8112007AD0BD /* Note.m */,
+				E20ED6F916EF8111007AD0BD /* Picture.h */,
+				E20ED6FA16EF8111007AD0BD /* Picture.m */,
 				E256EAC416ECC62900F3889D /* Supporting Files */,
 			);
 			path = NotePad;
@@ -209,7 +214,8 @@
 				E256EADA16ECC62A00F3889D /* DetailViewController.m in Sources */,
 				E20D4BE116ECE13100BB5C14 /* NotePad.xcdatamodeld in Sources */,
 				E2E7B35816EE0B070024BBD3 /* EditingVwCtlr.m in Sources */,
-				E266AE6116EE469D00AF7D29 /* Note.m in Sources */,
+				E20ED6FB16EF8111007AD0BD /* Picture.m in Sources */,
+				E20ED6FF16EF8112007AD0BD /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

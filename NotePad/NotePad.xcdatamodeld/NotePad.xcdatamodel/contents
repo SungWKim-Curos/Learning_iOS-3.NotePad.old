@@ -4,8 +4,15 @@
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pictures" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Picture" inverseName="attachedTo" inverseEntity="Picture" syncable="YES"/>
+    </entity>
+    <entity name="Picture" representedClassName="Picture" syncable="YES">
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="filePath" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="attachedTo" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Note" inverseName="pictures" inverseEntity="Note" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Note" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Note" positionX="81" positionY="239" width="128" height="105"/>
+        <element name="Picture" positionX="331" positionY="245" width="128" height="88"/>
     </elements>
 </model>
