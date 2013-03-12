@@ -22,4 +22,7 @@
 
 @property(strong,nonatomic) NSManagedObjectContext * managedObjectContext ;
 
+@property(weak,nonatomic) IBOutlet UIScrollView* imagePreview ;
+@property(weak,nonatomic) IBOutlet UIButton* addImgBtn ;
+
 @end

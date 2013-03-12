@@ -23,6 +23,11 @@
 
 
 @implementation EditingVwCtlr
+{
+    unsigned m_uImages ;
+    NSMutableArray* m_oNewImgPaths ;
+}
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -60,6 +65,8 @@
     {
         _navigationTitle.title = @"New Note" ;
     }
+    
+    m_oNewImgPaths = [ [NSMutableArray alloc] initWithCapacity:10 ] ;
 }
 
 
@@ -106,5 +113,37 @@
                   editingInfo:(NSDictionary*)a_oEditingInfo
 {
     [a_oPicker dismissModalViewControllerAnimated:YES];
+    
+    NSString* oFileName = [ [NSDate date] description ] ;
+    NSString* oFilePath = [ NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES ) lastObject ] ;
+    oFilePath = [ oFilePath stringByAppendingPathComponent:oFileName ] ;
+    oFilePath = [ oFilePath stringByAppendingPathExtension:@"jpg" ] ;
+    
+    NSData *oImgData = UIImageJPEGRepresentation(a_oImg, 0) ;
+    BOOL succ = [ oImgData writeToFile:oFilePath atomically:TRUE ] ;
+    if( ! succ ) return ;
+    
+    UIImageView* oImgVw = [ [UIImageView alloc] initWithImage:a_oImg ] ;
+    const float fSideLen = _imagePreview.frame.size.height ;
+    CGRect frame = CGRectMake( fSideLen * m_uImages, 0, fSideLen, fSideLen) ;
+    oImgVw.frame = frame ;
+    [ _imagePreview addSubview:oImgVw ] ;
+    
+    ++m_uImages ;
+    [ m_oNewImgPaths addObject:oFilePath ] ;
+    
+    frame = _addImgBtn.frame ;
+    frame.origin.x += fSideLen ;
+    _addImgBtn.frame = frame ;
+    
+    CGSize size = CGSizeMake( fSideLen*(m_uImages+1), fSideLen ) ;
+    _imagePreview.contentSize = size ;
+}
+
+
+-(void)touchesEnded:(NSSet*)a_oTouches withEvent:(UIEvent*)a_oEv
+{
+     [ _noteTitle resignFirstResponder ] ;
+     [ _content resignFirstResponder ] ;
 }
 @end
