@@ -98,6 +98,13 @@
 
 -(IBAction) cancelDidClick:(UIBarButtonItem*)a_oSender
 {
+    NSFileManager* oFileMgr = [ NSFileManager defaultManager ] ;
+    for( NSString* oFilePath in m_oNewImgPaths )
+    {
+        NSError* oErr = nil ;
+        [ oFileMgr removeItemAtPath:oFilePath error:&oErr ] ;
+    }
+    
     [ super dismissModalViewControllerAnimated:YES ] ;
 }
 
@@ -159,6 +166,7 @@
     NSData *oImgData = UIImageJPEGRepresentation(a_oImg, 0) ;
     BOOL succ = [ oImgData writeToFile:oFilePath atomically:TRUE ] ;
     if( ! succ ) return ;
+    [ m_oNewImgPaths addObject:oFilePath ] ;
     
     UIImageView* oImgVw = [ [UIImageView alloc] initWithImage:a_oImg ] ;
     const float fSideLen = _imagePreview.frame.size.height ;
@@ -167,7 +175,6 @@
     [ _imagePreview addSubview:oImgVw ] ;
     
     ++m_uImages ;
-    [ m_oNewImgPaths addObject:oFilePath ] ;
     
     frame = _addImgBtn.frame ;
     frame.origin.x += fSideLen ;
