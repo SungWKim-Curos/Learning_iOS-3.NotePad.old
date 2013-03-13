@@ -111,7 +111,9 @@
 
     // 내용 추가
     Note* oNote = m_oNotes[ indexPath.row ] ;
-    cell.textLabel.text = oNote.title ;
+    NSNumber* oNumOfImgs = [ oNote valueForKeyPath:@"pictures.@count" ] ;
+    cell.textLabel.text = [ NSString stringWithFormat:@"%@(%@)",
+                                            oNote.title, oNumOfImgs ];
     
     return cell;
 }
