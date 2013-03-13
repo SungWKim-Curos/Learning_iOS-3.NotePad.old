@@ -12,7 +12,7 @@
 
 
 @implementation MasterViewController {
-    NSMutableArray* m_oNotes ;
+    NSFetchedResultsController* m_oFetchResCtlr ;
 }
 
 
@@ -51,12 +51,16 @@
     [ oFetchReq setSortDescriptors:@[oSortDesc] ] ;
     
     // 실행
+    oFetchReq.FetchBatchSize = 20 ;
+    m_oFetchResCtlr = [ [NSFetchedResultsController alloc] initWithFetchRequest:oFetchReq
+                                                           managedObjectContext:_managedObjectContext
+                                                             sectionNameKeyPath:nil
+                                                                      cacheName:@"Root" ] ;
+    m_oFetchResCtlr.delegate = self ;
     NSError* oErr = nil ;
-    NSArray* oNotes =
-        [ _managedObjectContext executeFetchRequest:oFetchReq
-                                              error:&oErr ] ;
+    [ m_oFetchResCtlr performFetch:&oErr ] ;
     
-    m_oNotes = [ NSMutableArray arrayWithArray:oNotes ] ;
+    
 }
 
 
@@ -76,11 +80,6 @@
 
 -(void) didIndertNewNote:(Note *)a_oNewNote
 {
-    [ m_oNotes insertObject:a_oNewNote atIndex:0];
-    NSIndexPath* oIndexPath = [ NSIndexPath indexPathForRow:0
-                                                  inSection:0];
-    [ super.tableView insertRowsAtIndexPaths:@[oIndexPath]
-                            withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 
@@ -94,7 +93,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return m_oNotes.count ;
+    return [ m_oFetchResCtlr.sections[section] numberOfObjects ] ;
 }
 
 
@@ -109,12 +108,17 @@
     }
 
     // 내용 추가
-    Note* oNote = m_oNotes[ indexPath.row ] ;
-    NSNumber* oNumOfImgs = [ oNote valueForKeyPath:@"pictures.@count" ] ;
-    cell.textLabel.text = [ NSString stringWithFormat:@"%@(%@)",
-                                            oNote.title, oNumOfImgs ];
+    FillCell( cell, [ m_oFetchResCtlr objectAtIndexPath:indexPath ] ) ;
     
     return cell;
+}
+
+
+static void FillCell( UITableViewCell* a_oCell, Note* a_oNote )
+{
+    NSNumber* oNumOfImgs = [ a_oNote valueForKeyPath:@"pictures.@count" ] ;
+    a_oCell.textLabel.text = [ NSString stringWithFormat:@"%@(%@)",
+                              a_oNote.title, oNumOfImgs ];
 }
 
 
@@ -126,7 +130,7 @@
     
     oEditingVwCtlr.managedObjectContext = _managedObjectContext ;
     oEditingVwCtlr->m_oPrevCtlr = self ;
-    oEditingVwCtlr->m_oNote = m_oNotes[ indexPath.row ] ;
+    oEditingVwCtlr->m_oNote = [ m_oFetchResCtlr objectAtIndexPath:indexPath ]  ;
     
     [self.navigationController pushViewController:oEditingVwCtlr animated:YES];
 }
@@ -141,17 +145,14 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSInteger iRow = indexPath.row ;
-        Note* oNoteToDel =  m_oNotes[iRow] ;
-        [ m_oNotes removeObjectAtIndex:iRow ] ;
+        Note* oNoteToDel =  [ m_oFetchResCtlr objectAtIndexPath:indexPath ] ;
         
         // note를 지우고 저장
         [ _managedObjectContext deleteObject:oNoteToDel ] ;
         oNoteToDel = nil ;
         NSError* oErr = nil ;
-        [ _managedObjectContext save:&oErr ] ;        
-
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [ _managedObjectContext save:&oErr ] ;
+        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
@@ -172,5 +173,70 @@
     return YES;
 }
 */
+
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+-(void) controllerWillChangeContent:(NSFetchedResultsController*)a_oFetchResCtlr
+{
+    [ super.tableView beginUpdates ] ;
+}
+
+
+-(void) controller:(NSFetchedResultsController*)a_oFetchResCtlr
+   didChangeObject:(id)anObject atIndexPath:(NSIndexPath*)a_oIndexPath
+     forChangeType:(NSFetchedResultsChangeType)a_type
+      newIndexPath:(NSIndexPath*)a_oNewIndexPath
+{
+    
+    UITableView* oTv = super.tableView ;
+    
+    switch( a_type )
+    {
+        case NSFetchedResultsChangeInsert:
+            [ oTv insertRowsAtIndexPaths:@[a_oNewIndexPath] withRowAnimation:UITableViewRowAnimationFade ] ;
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [ oTv deleteRowsAtIndexPaths:@[a_oIndexPath] withRowAnimation:UITableViewRowAnimationFade ] ;
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            FillCell( [oTv cellForRowAtIndexPath:a_oIndexPath],
+                      [m_oFetchResCtlr objectAtIndexPath:a_oIndexPath] ) ;
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [ oTv deleteRowsAtIndexPaths:@[a_oIndexPath] withRowAnimation:UITableViewRowAnimationFade ] ;
+            [ oTv insertRowsAtIndexPaths:@[a_oNewIndexPath] withRowAnimation:UITableViewRowAnimationFade ] ;
+            break;
+    }
+}
+
+
+-(void) controller:(NSFetchedResultsController*)a_oFetchResCtlr
+  didChangeSection:(id)a_oSectionInfo
+           atIndex:(NSUInteger)a_uSectionIndex
+     forChangeType:(NSFetchedResultsChangeType)a_type
+{
+    switch( a_type )
+    {
+        case NSFetchedResultsChangeInsert:
+            [ super.tableView insertSections:[NSIndexSet indexSetWithIndex:a_uSectionIndex]
+                            withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [ super.tableView deleteSections:[NSIndexSet indexSetWithIndex:a_uSectionIndex]
+                            withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+-(void) controllerDidChangeContent:(NSFetchedResultsController*)a_oFetchResCtlr
+{
+    [ super.tableView endUpdates ] ;
+}
 
 @end
