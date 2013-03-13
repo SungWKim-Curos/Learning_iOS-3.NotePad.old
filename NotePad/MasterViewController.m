@@ -4,7 +4,6 @@
 #import "DetailViewController.h"
 #import "EditingVwCtlr.h"
 #import "Note.h"
-#import "Picture.h"
 
 
 @interface MasterViewController () {
@@ -144,15 +143,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSInteger iRow = indexPath.row ;
         Note* oNoteToDel =  m_oNotes[iRow] ;
-        
-        // 저장한 그림들 지우기
-        NSFileManager* oFileMgr = [ NSFileManager defaultManager ] ;
-        for( Picture* oPic in oNoteToDel.pictures )
-        {
-            NSError* oErr = nil ;
-            [ oFileMgr removeItemAtPath:oPic.filePath error:&oErr ] ;
-        }
-        
         [ m_oNotes removeObjectAtIndex:iRow ] ;
         
         // note를 지우고 저장

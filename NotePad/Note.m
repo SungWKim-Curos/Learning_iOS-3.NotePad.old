@@ -17,4 +17,15 @@
 @dynamic title;
 @dynamic pictures;
 
+
+-(void) prepareForDeletion
+{
+    NSFileManager* oFileMgr = [ NSFileManager defaultManager ] ;
+    for( Picture* oPic in self.pictures )
+    {
+        NSError* oErr = nil ;
+        [ oFileMgr removeItemAtPath:oPic.filePath error:&oErr ] ;
+    }
+}
+
 @end
