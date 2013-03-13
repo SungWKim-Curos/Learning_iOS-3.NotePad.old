@@ -4,10 +4,10 @@
 #import "DetailViewController.h"
 #import "EditingVwCtlr.h"
 #import "Note.h"
+#import "Picture.h"
 
 
 @interface MasterViewController () {
-    NSMutableArray *_objects;
 }
 @end
 
@@ -142,7 +142,25 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
+        NSInteger iRow = indexPath.row ;
+        Note* oNoteToDel =  m_oNotes[iRow] ;
+        
+        // 저장한 그림들 지우기
+        NSFileManager* oFileMgr = [ NSFileManager defaultManager ] ;
+        for( Picture* oPic in oNoteToDel.pictures )
+        {
+            NSError* oErr = nil ;
+            [ oFileMgr removeItemAtPath:oPic.filePath error:&oErr ] ;
+        }
+        
+        [ m_oNotes removeObjectAtIndex:iRow ] ;
+        
+        // note를 지우고 저장
+        [ _managedObjectContext deleteObject:oNoteToDel ] ;
+        oNoteToDel = nil ;
+        NSError* oErr = nil ;
+        [ _managedObjectContext save:&oErr ] ;        
+
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
