@@ -59,6 +59,14 @@
         
         _navBar.hidden = TRUE ;
         
+        // 삭제button 추가
+        UIBarButtonItem* oDelBtn =
+            [ [UIBarButtonItem alloc]
+                    initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                                         target:self
+                                         action:@selector(deleteNote) ] ;
+        self.navigationItem.rightBarButtonItem = oDelBtn ;
+        
         
         // note의 내용
         _noteTitle.text = m_oNote.title ;
@@ -190,4 +198,15 @@
      [ _noteTitle resignFirstResponder ] ;
      [ _content resignFirstResponder ] ;
 }
+
+
+-(void) deleteNote
+{
+    [ _managedObjectContext deleteObject:m_oNote ] ;
+    NSError* oErr = nil ;
+    [ _managedObjectContext save:&oErr ] ;
+    
+    [ super.navigationController popViewControllerAnimated:TRUE ] ;
+}
+
 @end
