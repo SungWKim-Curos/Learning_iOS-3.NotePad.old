@@ -27,6 +27,7 @@
 {
     unsigned m_uImages ;
     NSMutableArray* m_oNewImgPaths ;
+    BOOL m_modalViewOn ;
 }
 
 
@@ -80,7 +81,7 @@
             UIImage* oImg = [ UIImage imageWithContentsOfFile:oPicture.filePath ] ;
             UIImageView* oImgVw = [ [UIImageView alloc] initWithImage:oImg ] ;
             
-            frame.origin.x += fSideLen * m_uImages ;
+            frame.origin.x = fSideLen * m_uImages ;
             oImgVw.frame = frame ;
             [ _imagePreview addSubview:oImgVw ] ;
             
@@ -103,6 +104,36 @@
     m_oNewImgPaths = [ [NSMutableArray alloc] initWithCapacity:10 ] ;
 }
 
+
+-(void) viewWillDisappear:(BOOL)a_animated
+{
+    [ super viewWillDisappear:a_animated ] ;
+    
+    if( nil == m_oNote )
+        return ;
+    
+    if( m_modalViewOn )
+        return ;
+    
+    m_oNote.title = _noteTitle.text ;
+    m_oNote.content = _content.text ;
+    
+    const unsigned uCount = m_oNewImgPaths.count ;
+    for( unsigned u=0 ; u<uCount ; ++u )
+    {
+        Picture* oPic =
+            [ NSEntityDescription insertNewObjectForEntityForName:@"Picture"
+                                       inManagedObjectContext:_managedObjectContext ];
+        oPic.filePath = m_oNewImgPaths[u] ;
+        oPic.attachedTo = m_oNote ;
+    }
+    
+    __autoreleasing NSError* oErr = nil ;
+    [_managedObjectContext save:&oErr ] ;
+}
+
+
+#pragma mark - Actions
 
 -(IBAction) cancelDidClick:(UIBarButtonItem*)a_oSender
 {
@@ -156,6 +187,7 @@
     UIImagePickerController* oImgPicker = [ [UIImagePickerController alloc] init ] ;
     oImgPicker.delegate = self ;
     oImgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    m_modalViewOn = TRUE ;
     [ super presentModalViewController:oImgPicker animated:YES ] ;
 }
 
@@ -165,6 +197,7 @@
                   editingInfo:(NSDictionary*)a_oEditingInfo
 {
     [a_oPicker dismissModalViewControllerAnimated:YES];
+    m_modalViewOn = FALSE ;
     
     NSString* oFileName = [ [NSDate date] description ] ;
     NSString* oFilePath = [ NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES ) lastObject ] ;
